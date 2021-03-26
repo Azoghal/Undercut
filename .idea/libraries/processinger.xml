@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="processinger">
+    <CLASSES>
+      <root url="file://D:/processing/processing-3.5.4/core/library" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://D:/processing/processing-3.5.4/core/library" recursive="false" />
+  </library>
+</component>
