@@ -63,7 +63,7 @@ public class Car {
           //  p.ellipse(pv.x,pv.y,5,5);
         //}
 
-        if(pitting && vertex%trackPathCount >= pitStart && vertex%trackPathCount < pitEnd){
+        if(pitting && vertex%trackPathCount >= pitStart-1 && vertex%trackPathCount < pitEnd){
             d += pitSpeed;
         }
         else{
