@@ -30,21 +30,21 @@ public class Track {
             trackPoints[i] = new PVector(PApplet.cos(PApplet.radians(i*degreeSeperation)),PApplet.sin(PApplet.radians(i*degreeSeperation)));
             trackPoints[i].mult(radius);
             trackPoints[i].add(centre);
-            trackPoints[i].add(new PVector(p.random(-15,15),p.random(-15,15)));
+            //trackPoints[i].add(new PVector(p.random(-15,15),p.random(-15,15)));
         }
-
-        pitPointCount = trackPointCount/2 - trackPointCount/5 +1;
+        pitStart = 6*trackPointCount/10;
+        pitEnd = trackPointCount - trackPointCount/10;
+        pitPointCount = pitEnd - pitStart +1;
         PApplet.println(pitPointCount);
         pitPoints = new PVector[pitPointCount];
-        pitPoints[0] = trackPoints[trackPointCount/10].copy();
-        pitPoints[1] = PVector.add(pitPoints[0], new PVector(-40,20));
-        pitPoints[pitPointCount-1] = trackPoints[trackPointCount/2 - trackPointCount/10].copy();
-        pitPoints[pitPointCount-2] = PVector.add(pitPoints[pitPointCount-1], new PVector(40,20));
+        pitPoints[0] = trackPoints[pitStart].copy();
+        pitPoints[1] = PVector.add(pitPoints[0], new PVector(40,-20));
+        pitPoints[pitPointCount-1] = trackPoints[pitEnd].copy();
+        pitPoints[pitPointCount-2] = PVector.add(pitPoints[pitPointCount-1], new PVector(-40,-20));
         for(int i = 2; i < pitPointCount -2; i++){
             pitPoints[i] = new PVector(PApplet.map(i,1,pitPointCount-2, pitPoints[1].x,pitPoints[pitPointCount-2].x),PApplet.map(i,2,pitPointCount-1, pitPoints[1].y,pitPoints[pitPointCount-2].y));
         }
-        pitStart = trackPointCount/10;
-        pitEnd = trackPointCount/2 - trackPointCount/10;
+
         PApplet.println(pitStart);
         PApplet.println(pitEnd);
     }

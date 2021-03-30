@@ -1,10 +1,6 @@
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.stream.Stream;
-
 public class Car {
     PApplet p;
     float d;
@@ -20,11 +16,14 @@ public class Car {
     int pitEnd;
 
     boolean pitting;
-    boolean red;
+    int colour;
 
-    Car(PApplet p, Track t, boolean red){
+    float stopDistance;
+
+    Car(PApplet p, Track t, int colour){
         this.p = p;
-        this.red = red;
+        this.colour = colour;
+        this.stopDistance = 600;
         this.pitStart = t.pitStart;
         this.pitEnd = t.pitEnd;
         trackPath = t.trackPoints;
@@ -58,19 +57,24 @@ public class Car {
         pitting = false;
     }
 
+    void updateStopDistance(float maxd){
+        stopDistance = maxd;
+    }
+
     void display(){
         //for(PVector pv : pitPath){
           //  p.ellipse(pv.x,pv.y,5,5);
         //}
-
-        if(pitting && vertex%trackPathCount >= pitStart && vertex%trackPathCount < pitEnd){
-            d += pitSpeed;
+        if(d < stopDistance) {
+            if (pitting && vertex % trackPathCount >= pitStart && vertex % trackPathCount < pitEnd) {
+                d += pitSpeed;
+            } else {
+                d += speed;
+            }
+            if (d > vertex + 1) {
+                vertex++;
+            }
         }
-        else{
-            d+=speed;
-        }
-        if (d>vertex+1){vertex++;}
-
         int va = vertex%trackPathCount; //v1 v2 are the same track point for some reason.
         int v1 = (vertex+1)%trackPathCount;
         int v2 = (vertex+2)%trackPathCount;
@@ -96,12 +100,20 @@ public class Car {
             p.ellipse(trackPath[v3].x,trackPath[v3].y,3,3);
         }
 
-
-        p.fill(red?255:0,red?0:255,0);
+        //p.fill(colour);
+        setFill(colour);
+        //p.fill(red?255:0,red?0:255,0);
         p.strokeWeight(1);
         p.ellipse(x, y, 10, 10);
-        p.text(vertex,20,20 + (red?0:30));
-        p.text(d,50,20 + (red?0:30));
+        //p.text(vertex,20,20 + (?0:30));
+        //p.text(d,50,20 + (red?0:30));
 
+    }
+
+    void setFill(int c){
+        int R = c & 0xFF0000;
+        int G = c & 0x00FF00;
+        int B = c & 0x0000FF;
+        p.fill(R,G,B);
     }
 }
