@@ -35,7 +35,6 @@ public class Track {
         pitStart = 6*trackPointCount/10;
         pitEnd = trackPointCount - trackPointCount/10;
         pitPointCount = pitEnd - pitStart +1;
-        PApplet.println(pitPointCount);
         pitPoints = new PVector[pitPointCount];
         pitPoints[0] = trackPoints[pitStart].copy();
         pitPoints[1] = PVector.add(pitPoints[0], new PVector(40,-20));
@@ -45,8 +44,7 @@ public class Track {
             pitPoints[i] = new PVector(PApplet.map(i,1,pitPointCount-2, pitPoints[1].x,pitPoints[pitPointCount-2].x),PApplet.map(i,2,pitPointCount-1, pitPoints[1].y,pitPoints[pitPointCount-2].y));
         }
 
-        PApplet.println(pitStart);
-        PApplet.println(pitEnd);
+
     }
 
     public void display()
