@@ -55,6 +55,7 @@ public class Car {
         d = 0;
         vertex = 0;
         pitting = false;
+
     }
 
     void updateStopDistance(float maxd){
